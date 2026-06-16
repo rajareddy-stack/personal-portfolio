@@ -72,9 +72,10 @@ a[href="#main-content"]:focus {
    ========================================================================== */
 header[role="banner"] {
     display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    padding: 2rem 0;
+    flex-direction: column;     /* Stack brand and nav vertically on mobile screens */
+    gap: 1rem;                  /* Spacing between brand name and nav links on mobile */
+    align-items: flex-start;    /* Left-align brand text and nav layout */
+    padding: 2rem 0 1.5rem 0;
     border-bottom: 1px solid var(--border-color);
     margin-bottom: 4rem;
 }
@@ -83,11 +84,17 @@ header h1 {
     font-size: 1.25rem;
     font-weight: 700;
     letter-spacing: -0.02em;
+    white-space: nowrap;        /* Keeps your name locked on a single line */
+}
+
+nav[aria-label="Main Navigation"] {
+    width: 100%;                /* Full width box on mobile to cleanly spread nav options */
 }
 
 nav[aria-label="Main Navigation"] ul {
     display: flex;
-    gap: var(--nav-gap);
+    justify-content: space-between; /* Evenly spreads the inline list on small displays */
+    gap: 1rem;                  /* Tighter gap variant for mobile layouts */
     list-style: none;
 }
 
@@ -277,8 +284,21 @@ form[aria-label="Contact Form"] button:hover {
         padding: 0 4rem;
     }
 
+    /* Restores horizontal inline navigation layout for modern desktops/tablets */
     header[role="banner"] {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: baseline;
         padding: 3rem 0;
+    }
+
+    nav[aria-label="Main Navigation"] {
+        width: auto;
+    }
+
+    nav[aria-label="Main Navigation"] ul {
+        justify-content: flex-end;
+        gap: var(--nav-gap);
     }
 
     main section {
